@@ -1,5 +1,9 @@
 /*
+.config/*
+
 !.bin
+!.config
+!.config/fzf
 !.vim
 !.gitconfig
 !.gitignore

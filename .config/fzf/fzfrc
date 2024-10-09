@@ -1,0 +1,6 @@
+--bind="alt-w:toggle-preview"
+--bind="alt-j:preview-down,alt-k:preview-up,alt-G:preview-bottom,alt-g:preview-top,alt-e:toggle-preview-wrap"
+--bind="ctrl-l:clear-query"
+--layout="reverse"
+--info="right"
+--no-unicode
