@@ -1,1 +1,8 @@
-.rc.git/
+/*
+!.bin
+!.vim
+!.gitconfig
+!.gitignore
+!.gitmodules
+!.tmux.conf
+!.vimrc
