@@ -1,0 +1,12 @@
+#!/bin/bash
+
+todo_file_dir="$HOME/.config/local/share/todo"
+todo_file="$todo_file_dir/$(date "+%yw%Vd%u")_todo"
+
+mkdir -p "$todo_file_dir"
+touch "$todo_file"
+
+date +"[%T]: "  >> "$todo_file"
+
+vim "$todo_file" +
+

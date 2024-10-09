@@ -1,0 +1,60 @@
+#!/bin/bash
+
+PAGE_PREVIEW_HIGHLIGHT="${PAGE_PREVIEW_HIGHLIGHT:-1}"
+PAGE_PREVIEW_RANGE="${PAGE_PREVIEW_RANGE:-1:}"
+
+case "$1" in
+
+    "")
+        CENV="PAGE_QUERY={+1..+2}: PAGE_SECTION={1} PAGE_NAME={2} FZF_QUERY=''"
+        bash -c "$0 apropros-lines" \
+            | fzf --ansi \
+                --preview-label="${1:-apropros}" \
+                --header-lines="1" \
+                --multi \
+                --bind="enter:execute:env $CENV $0 page-inspect" \
+                --preview="env $CENV $0 page-preview" \
+                --preview-window="up:~1:45%"
+        ;;
+
+    "apropros-lines")
+        man -k '' \
+            | tr -s '[:blank:]' \
+            | sed -r 's/(.*) \((.*)\) - (.*)/\2:\1:\3/' \
+            | column --table -N 'Section,Page,Desc.' -s ':' -E '3' -l 3 \
+        ;;
+
+    "page-inspect")
+        FZF_QUERY="${FZF_QUERY:-^\w}"
+        CENV="PAGE_PREVIEW_HIGHLIGHT='{1}' PAGE_PREVIEW_RANGE='{1}:' FZF_QUERY={q}"
+        fzf --ansi \
+            --preview-label="${1:-apropros}" \
+            --disabled \
+            --delimiter=":" \
+            --query="$FZF_QUERY" \
+            --bind="start:reload:env $CENV $0 page-lines" \
+            --bind="change:reload:env $CENV $0 page-lines" \
+            --preview="env $CENV $0 page-preview" \
+            --preview-window="up:85%"
+        ;;
+
+    "page-preview")
+        man "$PAGE_SECTION" "$PAGE_NAME" \
+            | batcat -fp \
+                --language="man" \
+                --highlight-line="$PAGE_PREVIEW_HIGHLIGHT" \
+                --line-range="$PAGE_PREVIEW_RANGE"
+        ;;
+
+    "page-lines")
+        PAGE_LOCATION="$(man --where "$PAGE_SECTION" "$PAGE_NAME")"
+        man "$PAGE_LOCATION" \
+            | rg -nS --color="always" "$FZF_QUERY" \
+            || echo "0:"
+        ;;
+
+    "*")
+        echo "$0 ${*}: invalid argument ($1)"
+        exit 1
+        ;;
+esac
