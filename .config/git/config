@@ -1,0 +1,51 @@
+[includeIf "gitdir:~/.local/state/rc.git"]
+    path = ~/.config/rc.git/gitconfig
+[trace2]
+    ;eventTarget = ; 0=Disabled, 1=STDERR [2-9]=Write to fle desc.
+    ;af_unix:[<socket-type>:]<absolute-pathname>
+[branch]
+    autoSetupMerge = simple
+    autoSetupRebase = always
+[checkout]
+    workers = 0
+[clone]
+    defaultRemoteName = miami
+    filterSubmodules = true
+[core]
+    editor = /usr/bin/vim
+    longpaths = true
+[fetch]
+    writeCommitGraph = true
+    prune = true
+[grep]
+    lineNumber = true
+    patternType = "perl"
+    extendedRegexp = true
+[rerere]
+    enabled = true
+[pull]
+    rebase = true
+    autoStash = true
+[push]
+    autoSetupRemote = true
+    recurseSubmodules = "no"
+[rebase]
+    autoSquash = true
+    rebaseMerges = "rebase-cousins" ; bruh
+[status]
+    short = true
+    branch = true
+[stash]
+    index = true
+    showPatch = true
+    showStat = true
+[submodule]
+    fetchJobs = 0
+    recurse = true
+    propagateBranches = true
+[worktree]
+    useRelativePaths = true
+[help]
+    autoCorrect = "immediate"
+[index]
+    skipHash = true

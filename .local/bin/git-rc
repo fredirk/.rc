@@ -1,0 +1,49 @@
+#!/bin/sh
+
+ME="rc.git"
+GIT_DIR="$HOME/.local/share/$ME"
+GIT_WORK_TREE="$HOME"
+
+clone() {
+    REMOTE="${REMOTE:-git@github.com:fredirk/.rc.git}"
+    BRANCH="${BRANCH:-debian}"
+
+    mkdir -pv "$(dirname "${GIT_DIR%/$ME}")"
+    mkdir -pv "$(dirname "$GIT_WORK_TREE")"
+    
+    if test -d "$GIT_DIR" 2>/dev/null
+       then echo "$(basename "$0"): clone directory '$GIT_DIR' already exists" >&2
+            exit 1
+       else git clone \
+                --branch "${BRANCH}" \
+                --config status.showUntrackedFiles=no \
+                --bare "${REMOTE}" "${GIT_DIR}"
+    fi
+}
+
+init() {
+    if git checkout         &&
+       git init --no-bare   &&
+       git submodule init   &&
+       git submodule status &&
+       git hook run --ignore-missing rc-init -- "$GIT_WORK_TREE"
+        then if test -f "$GIT_WORK_TREE/.local/bin/git-rc"
+                then if ! test -x "$GIT_WORK_TREE/.local/bin/git-rc"
+                          then chmod +x "$GIT_WORK_TREE/.local/bin/git-rc"
+                     fi
+             fi
+        else exit $?
+    fi
+}
+
+export GIT_DIR
+export GIT_WORK_TREE
+
+if test $# -eq 0
+   then if ! git status 2>/dev/null
+            then clone
+                 init
+            else init
+        fi
+   else git "$@" || echo exit $?
+fi

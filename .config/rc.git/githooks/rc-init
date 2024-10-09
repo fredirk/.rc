@@ -1,0 +1,21 @@
+#!/bin/sh
+
+GIT_WORK_TREE="$1"
+
+export GIT_WORK_TREE
+
+for k in $(git rev-parse --local-env-vars)
+do
+    v="$(printenv "$k")"
+    if test -n "$v"
+    then
+        echo "$k=$v"
+    fi
+done
+
+ini_file="$GIT_WORK_TREE/.local/bin/rc-init"
+
+if test -f "$ini_file"
+then
+    exec "$ini_file" || echo exit $?
+fi

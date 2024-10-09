@@ -1,0 +1,14 @@
+#!/bin/sh
+if dist="$(lsb_release -is | sed -E 's:.*:\L\0:g')"
+then case "${dist}"
+     in debian)
+            sudo apt-get update
+            sudo apt-get upgrade
+            sudo apt-get install git git-extras vim ripgrep tmux bat fzf direnv
+            ;;
+        *)
+            printf "invalid: '%s'\n" "$dist" >&2
+            exit 1
+        ;;
+     esac
+fi
