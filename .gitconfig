@@ -1,2 +1,4 @@
 [alias]
 	rc = "!git --git-dir=$HOME/.rc.git/ --work-tree=$HOME"
+[rerere]
+	enabled = true
