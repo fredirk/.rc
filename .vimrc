@@ -3,6 +3,18 @@ source $VIMRUNTIME/defaults.vim
 nnoremap "," <Nop>
 let mapleader = ","
 
+if executable('clangd')
+    autocmd User lsp_setup call lsp#register_server({
+                \ 'name': 'clangd',
+                \ 'cmd': ['clangd'],
+                \ 'allowlist': ['c', 'cpp'],
+                \ })
+endif
+
+let g:ale_linters = {
+            \ 'c': ['clangtidy'],
+            \ 'cpp': ['clangtidy'],
+            \ }
 let g:ale_pattern_options_enabled = 1
 let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
