@@ -17,6 +17,7 @@ set scrolloff=5
 set hlsearch
 set incsearch
 set laststatus=2
+set signcolumn=yes
 
 filetype on
 filetype plugin on
