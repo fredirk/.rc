@@ -1,0 +1,22 @@
+# Usage: use opam
+#
+# Evaluate opam environment
+#
+use_opam() {
+  if has opam
+     then eval $(opam env)
+  fi
+}
+
+# Usage: use pyenv
+#
+# Load pyenv-virtualenv
+#
+use_pyenv() {
+  if has pyenv
+     then PYENV_ROOT="$HOME/.pyenv"
+          PATH_add "$PYENV_ROOT/bin"
+          eval "$(pyenv init - bash)"
+          eval "$(pyenv virtualenv-init -)"
+  fi
+}
