@@ -1,0 +1,36 @@
+[submodule "vim-lsp-ale"]
+	path = pack/git-plugins/start/vim-lsp-ale
+	url = https://github.com/rhysd/vim-lsp-ale.git
+	branch = master
+[submodule "vim-lsp"]
+	path = pack/git-plugins/start/vim-lsp
+	url = https://github.com/prabirshrestha/vim-lsp.git
+	branch = master
+[submodule "fzf"]
+	path = pack/git-plugins/start/fzf
+	url = https://github.com/junegunn/fzf.git
+	branch = master
+[submodule "fzf.vim"]
+	path = pack/git-plugins/start/fzf.vim
+	url = https://github.com/junegunn/fzf.vim.git
+	branch = master
+[submodule "ale"]
+	path = pack/git-plugins/start/ale
+	url = https://github.com/dense-analysis/ale.git
+	branch = master
+[submodule "omnisharp-vim"]
+	path = pack/git-plugins/start/omnisharp-vim
+	url = https://github.com/OmniSharp/omnisharp-vim
+	branch = master
+[submodule "fsharp-vim"]
+	path = pack/git-plugins/opt/fsharp-vim
+	url = https://github.com/kongo2002/fsharp-vim.git
+	branch = master
+[submodule "vimspector"]
+	path = pack/git-plugins/opt/vimspector
+	url = https://github.com/puremourning/vimspector.git
+	branch = master
+[submodule "vim-lsp-settings"]
+	path = pack/git-plugins/start/vim-lsp-settings
+	url = https://github.com/mattn/vim-lsp-settings.git
+	branch = master
