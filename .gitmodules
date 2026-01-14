@@ -2,3 +2,7 @@
 	path = .config/vim
 	url = git@github.com:fredirk/.rc.git
 	branch = vim
+[submodule "direnv"]
+	path = .config/direnv
+	url = git@github.com:fredirk/.rc.git
+	branch = direnv
